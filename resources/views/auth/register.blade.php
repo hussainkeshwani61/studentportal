@@ -28,10 +28,11 @@
   label {
     margin-bottom: 10px;
     font-size: 1.2rem;
-    color: black;
+    color: Black;
     /* text-shadow: 1px 1px #000; */
   }
 
+  
 
   input[type="submit"] {
     background-color: #F44336;
@@ -61,8 +62,7 @@
 <body>
 <div class="card w-50 mx-auto mt-5">
     <div class="card-body">
-        <h1 class="card-title text-center mb-4">Student Login</h1>
-        
+        <h1 class="card-title text-center mb-4">Student Registration</h1>
         @if($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -83,21 +83,29 @@
                     {{ session('error') }}
                 </div>
             @endif
-        <form method="POST" action="{{ route('login') }}">
-          @csrf
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" name="email">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
-          </div>
-          <button type="submit" style="width:100px;" class="btn btn-primary btn-block">Login</button>
-        </form>
-        <div class="text-center mt-4">
-        Don't have an account? <a href="{{ route('register') }}">Register now</a>
-        </div>
+            <form method="post" action="{{ route('register_submit') }}">
+        @csrf
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email address</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+      <div class="form-group">
+        <label for="password_confirmation">Confirm Password</label>
+        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Register</button>
+    </form>
+</fieldset><br>
+<center><p>Already have an account? <a href="{{ route('login') }}">Login</a></p></center>
+  </div>
     </div>
 </div>
   <!-- Add Bootstrap JS -->
