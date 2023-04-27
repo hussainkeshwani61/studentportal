@@ -6,9 +6,18 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index() {
-        return view('')
+    public function index(){
+        if(empty(auth()->user()->id)){
+            return redirect()->route('login');
+        }
+        $courses = Course::all();
+        $enrolled_courses = Enrollment::where('student_id', auth()->user()->id)->pluck('course_id')->toArray();
+        return view('dashboard', 
+        ['courses' => $courses],
+        ['enrolled_courses' => $enrolled_courses]
+        );
     }
+    
     public function profile(){
         if(empty(auth()->user()->id)){
             return redirect()->route('login');

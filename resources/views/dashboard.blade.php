@@ -177,7 +177,40 @@ p {
                 {{ session('success') }}
             </div>
         @endif
-
+        <h1>Courses</h1>
+        <table id="datatable">
+            <thead>
+                <tr>
+                    <th>Course ID</th>
+                    <th>Course Name</th>
+                    <th>Description</th>
+                    <th>Course Fee</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($courses as $course)
+                    <tr>
+                        <td>{{ $course->course_id }}</td>
+                        <td>{{ $course->name }}</td>
+                        <td>{{ $course->description }}</td>
+                        <td>{{ $course->course_fee }}</td>
+                        <td>
+                            @if(in_array($course->course_id, $enrolled_courses))
+                                <button type="button" class="btn btn-warning" disabled>Enrolled</button>
+                            @else
+                            <form method="POST" action="{{ route('enroll') }}">
+                                @csrf
+                                <input type="hidden" name="course_id" value="{{ $course->course_id }}">
+                                <input type="hidden" name="course_fee" value="{{ $course->course_fee }}">
+                                <button type="submit" class="btn btn-warning">Enroll</button>
+                            </form>
+                            @endif
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
         
     </div>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-
