@@ -10,7 +10,7 @@
 	<div class="card-body">
 		<h5 class="card-title">Welcome to the Student Portal!</h5>
 		<a href="{{ route('login') }}" class="btn btn-primary mx-2">Login</a>
-		{{-- <a href="{{ route('register') }}" class="btn btn-secondary mx-2">Register</a> --}}
+		<a href="{{ route('register') }}" class="btn btn-secondary mx-2">Register</a>
 	</div>
 </div>
 </body>

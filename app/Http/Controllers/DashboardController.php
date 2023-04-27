@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    public function index() {
+        return view('')
+    }
     public function profile(){
         if(empty(auth()->user()->id)){
             return redirect()->route('login');
@@ -24,4 +27,5 @@ class DashboardController extends Controller
         $student->save();
         return redirect()->route('profile')->with('success', 'Profile updated successfully');
     }
+
 }

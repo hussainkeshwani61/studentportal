@@ -17,7 +17,10 @@ Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name
 Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@register')->name('register_submit');
 
-
+// Dashboard route
+Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+    
 //Profile route
 Route::get('/profile', 'App\Http\Controllers\DashboardController@profile')->name('profile');
 Route::post('/profile/update', 'App\Http\Controllers\DashboardController@updateProfile')->name('profile.update');
+
