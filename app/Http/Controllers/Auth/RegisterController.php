@@ -16,9 +16,10 @@ class RegisterController extends Controller
     }
 
     public function register(Request $request){
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required'
         ]);
         $password = $request->password;
         if (strlen($password) < 8 || !preg_match("/[A-Z]/", $password) || !preg_match("/[!@#$%^&*()\-_=+{};:,<.>]/", $password)) {
@@ -41,7 +42,6 @@ class RegisterController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            // dd("here");
             $user->save();
             //to login page with session success
             return redirect()->route('login')->with('success', 'Registration successful. Please login');

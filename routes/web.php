@@ -19,8 +19,13 @@ Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@register'
 
 // Dashboard route
 Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
-    
+
+//Enroll route
+Route::post('/enroll', 'App\Http\Controllers\DashboardController@enroll')->name('enroll');
+
+//graduation route
+Route::get('/graduation', 'App\Http\Controllers\DashboardController@graduation')->name('graduation');
+
 //Profile route
 Route::get('/profile', 'App\Http\Controllers\DashboardController@profile')->name('profile');
 Route::post('/profile/update', 'App\Http\Controllers\DashboardController@updateProfile')->name('profile.update');
-
