@@ -12,9 +12,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $id = auth()->user()->id;
-        if(empty($id)){
-            return redirect()->route('login');
+        if(empty(auth()->user()->id)){
+            return redirect()->route('welcome');
         }
         $courses = Course::all();
         $enrolled_courses = Enrollment::where('student_id', $id)->pluck('course_id')->toArray();
@@ -26,12 +25,11 @@ class DashboardController extends Controller
     
     public function enroll(Request $request)
     {
-        $id = auth()->user()->id;
-        if(empty($id)){
-            return redirect()->route('login');
+        if(empty(auth()->user()->id)){
+            return redirect()->route('welcome');
         }
         $enrollment = new Enrollment;
-        $enrollment->student_id = $id;
+        $enrollment->student_id = auth()->user()->id;
         $enrollment->course_id = $request->course_id;
         $enrollment->save();
         $studentId = auth()->user()->student_id;
@@ -50,9 +48,8 @@ class DashboardController extends Controller
 
     public function graduation()
     {
-        $id = auth()->user()->id;
-        if(empty($id)){
-            return redirect()->route('login');
+        if(empty(auth()->user()->id)){
+            return redirect()->route('welcome');
         }
         $student_id = auth()->user()->student_id;
         $client = new Client();
@@ -79,9 +76,8 @@ class DashboardController extends Controller
 
     public function profile()
     {
-        $id = auth()->user()->id;
-        if(empty($id)){
-            return redirect()->route('login');
+        if(empty(auth()->user()->id)){
+            return redirect()->route('welcome');
         }
         $student = auth()->user();
         return view('view_profile', ['student' => $student]);
@@ -89,9 +85,8 @@ class DashboardController extends Controller
 
     public function updateProfile(Request $request)
     {
-        $id = auth()->user()->id;
-        if(empty($id)){
-            return redirect()->route('login');
+        if(empty(auth()->user()->id)){
+            return redirect()->route('welcome');
         }
         $student = auth()->user();
         $student->name = $request->name;
