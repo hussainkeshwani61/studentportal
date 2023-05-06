@@ -16,7 +16,7 @@ class DashboardController extends Controller
             return redirect()->route('welcome');
         }
         $courses = Course::all();
-        $enrolled_courses = Enrollment::where('student_id', $id)->pluck('course_id')->toArray();
+        $enrolled_courses = Enrollment::where('student_id', auth()->user()->id)->pluck('course_id')->toArray();
         return view('dashboard', 
         ['courses' => $courses],
         ['enrolled_courses' => $enrolled_courses]
