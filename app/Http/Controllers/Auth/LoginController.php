@@ -13,22 +13,20 @@ use Auth;
 class LoginController extends Controller
 {
     //
-    public function showLoginForm(){
+    public function showLoginForm()
+    {
         return view('auth.login');
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $request->validate([
             'email' => 'required|string|email|max:255',
             'password' => 'required|string|min:1',
         ]);
-        
-        //Check if user exists
         $user = User::where('email', $request->email)->first();
         if($user){
-            //Check if password matches
             if(Hash::check($request->password, $user->password)){
-                //Login user
                 Auth::login($user);
                 return redirect()->route('dashboard');
             }else{
@@ -40,7 +38,8 @@ class LoginController extends Controller
         return redirect()->back()->with('error', 'Invalid login details');
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('welcome');
     }
